@@ -2,6 +2,7 @@ package com.example.Sehedule.Entity;
 
 import java.time.LocalDate;
 
+import com.example.Sehedule.CustomException.StatusTpyeNotNullException;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -38,6 +39,7 @@ public class Task {
 	}
 
 	public String getTasktype() {
+		
 		return tasktype;
 	}
 
@@ -54,6 +56,7 @@ public class Task {
 	}
 
 	public void setTasktype(String tasktype) {
+		
 		this.tasktype = tasktype;
 	}
 

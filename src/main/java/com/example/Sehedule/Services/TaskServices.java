@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Sehedule.CustomException.StatusTpyeNotNullException;
+import com.example.Sehedule.Dtos.AreaDto;
+import com.example.Sehedule.Dtos.TaskDto;
 import com.example.Sehedule.Entity.Area;
 import com.example.Sehedule.Entity.Task;
 import com.example.Sehedule.Repo.AreaRepo;
@@ -21,11 +25,37 @@ public class TaskServices {
 	@Autowired
 	private AreaRepo areaRepo;
 	
-	public Task sehedualeTask(Task task,long id)
+	
+	@Autowired 
+	private ModelMapper mapper; 
+	
+	
+	private TaskDto TaskToDto(Task task)
 	{
-		Area area = areaRepo.findById(id).orElseThrow();
-		task.setArea(area);
-		return taskRepo.save(task);
+		return mapper.map(task, TaskDto.class);
+	}
+	
+	private Task DtoToTask(TaskDto taskDto)
+	{
+		return mapper.map(taskDto, Task.class);
+	}
+	
+	
+	
+	public TaskDto sehedualeTask(TaskDto taskDto,long id)
+	{
+		Area area= areaRepo.findById(id).orElseThrow();
+	 Task task = DtoToTask(taskDto);
+	 task.setArea(area);
+	 if(task.getTasktype()==null)
+	 {
+		
+			
+				throw new StatusTpyeNotNullException("Status must not be null");
+			
+	 }
+	 Task savedTask = taskRepo.save(task);
+	 return TaskToDto(savedTask);
 	}
        
 	
@@ -37,9 +67,13 @@ public class TaskServices {
 		taskRepo.save(t);
 		return "update";
 	}
-	public List<Task> findWeeklyTasks(LocalDate start, LocalDate end) {
-	    return taskRepo.findWeeklytask(start, end);
+	public List<TaskDto> findWeeklyTasks(LocalDate start, LocalDate end) {
+	    List<Task> tasks = taskRepo.findWeeklytask(start, end);
+	    return tasks.stream()
+	                .map(this::TaskToDto)
+	                .collect(Collectors.toList());
 	}
+
 
 	
 	public Map<String, Long> getWeekklySummary(LocalDate start,LocalDate end)
@@ -48,22 +82,27 @@ public class TaskServices {
 		return statsList.stream().collect(Collectors.toMap(s->(String)s[0], s->(Long)s[1]));
 	}
 	
-	public List<Task> GetAllTaskDetails()
+	public List<TaskDto> GetAllTaskDetails()
 	{
-		return taskRepo.findAll();	
+		List<Task> tasks= taskRepo.findAll();	
+		return tasks.stream().map(this::TaskToDto).collect(Collectors.toList());	
 	}
 	
-	public Task GetTaskDetaisById(long id)
+	public TaskDto GetTaskDetaisById(long id)
 	{
-		return taskRepo.findById(id).orElseThrow(null);
+		Task task = taskRepo.findById(id).orElseThrow();
+		return TaskToDto(task);
 	}
 
 	
 	
 	
-	public void update(Task task,long id)
+	public void update(TaskDto taskDto,long id)
 	{
-		task.setId(id);
+taskDto.setId(id);
+		
+	Task task= DtoToTask(taskDto);
+		
 		taskRepo.save(task);
 	}
 	

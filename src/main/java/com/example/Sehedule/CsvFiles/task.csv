@@ -1,0 +1,4 @@
+area_id,floor,wing,task_id,task_type,schedule_date,status
+1,2nd,A,101,Cleaning,2025-07-25,Pending
+1,2nd,A,102,Inspection,2025-07-26,Completed
+2,3rd,B,103,Repair,2025-07-27,InProgress
