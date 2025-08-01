@@ -11,8 +11,11 @@ import jakarta.validation.constraints.*;
 
 public class AreaDto {
 	
-	@NotNull(message = "id is not null")
-	@Min(value = 0 , message = "id must be greater then 0")
+	
+//	@NotNull(message = "id is not null")
+	 
+	  @Min(value = 0 , message = "id must be greater then 0")
+	 
 private long id;
 public long getId() {
 	return id;

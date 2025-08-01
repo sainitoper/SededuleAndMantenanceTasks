@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class TaskDto {
-	@NotNull(message = "id is not null")
+//	@NotNull(message = "id is not null")
 	@Min(value = 0 , message = "id must be greater then 0")
 	private long id;
 	
