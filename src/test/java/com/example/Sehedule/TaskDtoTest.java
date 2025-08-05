@@ -2,21 +2,23 @@ package com.example.Sehedule;
 
 import java.time.LocalDate;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.junit.jupiter.api.Test;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Dtos.TaskDto;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 public class TaskDtoTest {
-
-	
 	@Test
 	void testgeterandsetters()
 	{
+		
 		TaskDto task = new TaskDto();
 		task.setId(1L);
 		task.setTasktype("Cleaning");

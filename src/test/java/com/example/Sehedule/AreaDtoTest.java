@@ -1,6 +1,7 @@
 package com.example.Sehedule;
 
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.example.Sehedule.Dtos.AreaDto;
@@ -8,6 +9,7 @@ import com.example.Sehedule.Dtos.TaskDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,4 +32,20 @@ public class AreaDtoTest {
         assertEquals("EastWing", area.getWing());
         assertSame(tasks, area.getTasks());
     }
+    
+//   @Test
+//   @Tag("fast")
+//   void fast()
+//   {
+//	   System.out.println("fast run");
+//   }
+//    
+//   @Test
+//   @Tag("slow")
+//   void slow()
+//   {
+//	   System.out.println("slow run");
+//   }
+    
+
 }

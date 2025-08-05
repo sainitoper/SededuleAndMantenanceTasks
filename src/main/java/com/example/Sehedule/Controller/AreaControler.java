@@ -16,8 +16,7 @@ import com.example.Sehedule.Entity.Area;
 import com.example.Sehedule.Services.AreaServices;
 import com.example.Sehedule.Services.CsvServices;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -25,15 +24,8 @@ import jakarta.validation.Valid;
 public class AreaControler {
 	@Autowired
 	private AreaServices areaServices;
-	@Autowired
-	private CsvServices csvServices;
 	
 	@GetMapping("/example")
-	@Operation(summary = "Get example data")
-	@ApiResponses(value = {
-	    //@ApiResponse(responseCode = "200", description = "Success"),
-	    //@ApiResponse(responseCode = "404", description = "Not Found")
-	})
 	public List<AreaDto> getAll()
 	{
 		return areaServices.GetAllAreaDetails();

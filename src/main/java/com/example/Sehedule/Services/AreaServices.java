@@ -17,16 +17,16 @@ public class AreaServices {
 	@Autowired
 	private AreaRepo areaRepo;
 	
-	@Autowired 
-	private ModelMapper mapper;
+	@Autowired
+	public ModelMapper mapper;
 	
 	
-	private AreaDto AreaToDto(Area area)
+	private  AreaDto AreaToDto(Area area)
 	{
 		return mapper.map(area, AreaDto.class);
 	}
 	
-	private Area DtoToArea(AreaDto areaDto)
+	private  Area DtoToArea(AreaDto areaDto)
 	{
 		return mapper.map(areaDto, Area.class);
 	}

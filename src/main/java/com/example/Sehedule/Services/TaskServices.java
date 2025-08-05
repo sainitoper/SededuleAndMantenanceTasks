@@ -20,7 +20,7 @@ import com.example.Sehedule.Repo.TaskRepo;
 @Service
 public class TaskServices {
 	@Autowired
-	private TaskRepo taskRepo;
+	private TaskRepo taskRepo; 
 	
 	@Autowired
 	private AreaRepo areaRepo;
