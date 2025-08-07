@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.Sehedule.Services.CsvServices;
+import io.swagger.v3.oas.annotations.media.Content;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RestController
 @RequestMapping("/csvcontro")
 public class CsvController {
@@ -15,7 +20,13 @@ public class CsvController {
 	@Autowired
 	private CsvServices csvServices;
 	
-	@PostMapping("/csv-file")
+	@PostMapping(value="/csv-file", consumes = "multipart/form-data")
+	@Operation(summary = "Upload CSV file to database")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "File uploaded successfully"),
+			@ApiResponse(responseCode = "400", description = "Invalid file", content = @Content(mediaType = "application/json"))
+
+	})
 	public String Csvfileuploadtodb(@RequestParam("file") MultipartFile file)
 	{
 		if(file.isEmpty()|| !file.getOriginalFilename().endsWith(".csv"))
@@ -32,7 +43,13 @@ public class CsvController {
 	}
 	
 	
-	@PostMapping("/csv-mapping")
+	@PostMapping(value="/csv-mapping", consumes = "multipart/form-data")
+	@Operation(summary = "Upload CSV MAPPING file to database")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "File uploaded successfully of csv"),
+			@ApiResponse(responseCode = "400", description = "Invalid file", content = @Content(mediaType = "application/json"))
+
+	})
 	public String CsvMapping(@RequestParam("file") MultipartFile file)
 	{
 		try {

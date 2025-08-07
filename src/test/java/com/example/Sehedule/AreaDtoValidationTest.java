@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.example.Sehedule.Dtos.AreaDto;
+import com.example.Sehedule.validations.logic.ValidFloorValidator;
+import com.example.Sehedule.validations.logic.ValidWingValidator;
 
 import java.util.Set;
 
@@ -80,6 +82,19 @@ public class AreaDtoValidationTest {
         assertTrue(violations.stream()
                 .anyMatch(v -> v.getPropertyPath().toString().equals("wing")));
     }
+    @Test
+    void testWingIsNull() {
+        ValidWingValidator validator = new ValidWingValidator();
+        boolean result = validator.isValid(null, null);  
+        assertFalse(result);  
+    }
+    @Test
+    void testfloorIsNull() {
+        ValidFloorValidator validator = new ValidFloorValidator();
+        boolean result = validator.isValid(null, null);  
+        assertFalse(result); 
+    }
+
 
 
 }

@@ -62,7 +62,7 @@ public class AreaControllerTest {
 		
 		mockMvc.perform(post("/area")
 		        .contentType(MediaType.APPLICATION_JSON)  
-		        .content("{\"id\":1,\"floor\":\"13th\",\"wing\":\"Y\"}"))
+		        .content("{\"id\":1,\"floor\":\"15th\",\"wing\":\"Y\"}"))
 		    .andExpect(status().isOk())
 		    .andExpect(content().string("Done"));
 

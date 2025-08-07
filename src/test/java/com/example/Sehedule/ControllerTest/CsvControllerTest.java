@@ -104,6 +104,15 @@ public class CsvControllerTest {
 	            .andExpect(status().isOk())
 	            .andExpect(content().string("Mapping error"));
 	    }
-	
+	 @Test
+	 void testCsvfileuploadto_InvalidExtension() throws Exception {
+	     MockMultipartFile multipartFile = new MockMultipartFile(
+	         "file", "area.txt", "text/plain", "id,floor,wing".getBytes());
+
+	     mockMvc.perform(multipart("/csvcontro/csv-file").file(multipartFile))
+	         .andExpect(status().isOk())
+	         .andExpect(content().string("file not found"));
+	 }
+
 	 
 }

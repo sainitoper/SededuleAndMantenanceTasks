@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Entity.Area;
 import com.example.Sehedule.Repo.AreaRepo;
-
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
 @Service
 public class AreaServices {
 	@Autowired
@@ -63,4 +64,10 @@ public class AreaServices {
 	{
 		areaRepo.deleteById(id);
 	}
+	
+//	public Page<AreaDto> GetAllAreaDetail(Pageable pageable) {
+//	    Page<Area> areasPage = areaRepo.findAll(pageable);
+//	    return areasPage.map(this::AreaToDto);
+//	}
+
 }
