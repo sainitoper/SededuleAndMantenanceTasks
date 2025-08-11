@@ -2,19 +2,25 @@ package com.example.Sehedule.ServicesTest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.springframework.data.domain.Pageable;
 
-import java.util.*;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.commons.annotation.Testable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Entity.Area;
@@ -60,6 +66,8 @@ public class AreaServiceTest {
 		
 		List<AreaDto> list = areaServices.GetAllAreaDetails();
 		
+
+		
 		assertEquals(1, list.size());
 		assertEquals("13th", list.get(0).getFloor());
 		verify(areaRepo).findAll();
@@ -102,12 +110,21 @@ public class AreaServiceTest {
 	}
 	
 	@Test
-	void testdelete()
-	{
-		areaServices.delete(1L);
-		
-		verify(areaRepo).deleteById(1L);
+	void testgetAllbypaging() {
+	    Pageable pageable = PageRequest.of(0, 10);
+	    Page<Area> dummyPage = new PageImpl<>(Collections.emptyList());
+
+	    when(areaRepo.findByFloorAndWing("1st", "A", pageable)).thenReturn(dummyPage);
+	    when(areaRepo.findByFloor("1st", pageable)).thenReturn(dummyPage);
+	    when(areaRepo.findByWing("A", pageable)).thenReturn(dummyPage);
+	    when(areaRepo.findAll(pageable)).thenReturn(dummyPage);
+
+	    areaServices.GetAllAreaDetail("1st", "A", pageable);
+	    areaServices.GetAllAreaDetail("1st", null, pageable);
+	    areaServices.GetAllAreaDetail(null, "A", pageable);
+	    areaServices.GetAllAreaDetail(null, null, pageable);
 	}
+
 	
 
 }

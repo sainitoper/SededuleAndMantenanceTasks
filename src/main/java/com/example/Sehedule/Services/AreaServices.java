@@ -1,18 +1,18 @@
 package com.example.Sehedule.Services;
 
-import java.security.PublicKey;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Entity.Area;
 import com.example.Sehedule.Repo.AreaRepo;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.Pageable;
+
 @Service
 public class AreaServices {
 	@Autowired
@@ -60,14 +60,27 @@ public class AreaServices {
 		areaRepo.save(area);
 	}
 	
-	public void delete(long id)
-	{
-		areaRepo.deleteById(id);
-	}
+
 	
-//	public Page<AreaDto> GetAllAreaDetail(Pageable pageable) {
+	public Page<AreaDto> GetAllAreaDetail(String floor,String wing,   Pageable pageable) {
+		 Page<Area> areasPage;
+		if(floor!=null && wing!=null)
+		{
+			areasPage=	areaRepo.findByFloorAndWing(floor, wing, pageable);
+		}
+		else if(floor!=null)
+		{
+			areasPage=	areaRepo.findByFloor(floor, pageable);
+		}
+		else if(wing!=null)
+		{
+			areasPage=areaRepo.findByWing(wing, pageable);
+		}
+		else {
+			areasPage=areaRepo.findAll(pageable);
+		}
 //	    Page<Area> areasPage = areaRepo.findAll(pageable);
-//	    return areasPage.map(this::AreaToDto);
-//	}
+	    return areasPage.map(this::AreaToDto);
+}
 
 }

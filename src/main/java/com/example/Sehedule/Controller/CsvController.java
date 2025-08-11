@@ -21,7 +21,7 @@ public class CsvController {
 	private CsvServices csvServices;
 	
 	@PostMapping(value="/csv-file", consumes = "multipart/form-data")
-	@Operation(summary = "Upload CSV file to database")
+	@Operation(summary = "Upload CSV file to database",description = "Upload csv Area file")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "File uploaded successfully"),
 			@ApiResponse(responseCode = "400", description = "Invalid file", content = @Content(mediaType = "application/json"))
@@ -44,7 +44,7 @@ public class CsvController {
 	
 	
 	@PostMapping(value="/csv-mapping", consumes = "multipart/form-data")
-	@Operation(summary = "Upload CSV MAPPING file to database")
+	@Operation(summary = "Upload CSV MAPPING file to database",description = "upload csv mapping file")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "File uploaded successfully of csv"),
 			@ApiResponse(responseCode = "400", description = "Invalid file", content = @Content(mediaType = "application/json"))

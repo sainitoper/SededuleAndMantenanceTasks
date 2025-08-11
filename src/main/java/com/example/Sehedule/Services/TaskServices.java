@@ -7,10 +7,11 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Sehedule.CustomException.StatusTpyeNotNullException;
-import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Dtos.TaskDto;
 import com.example.Sehedule.Entity.Area;
 import com.example.Sehedule.Entity.Task;
@@ -87,7 +88,11 @@ public class TaskServices {
 		List<Task> tasks= taskRepo.findAll();	
 		return tasks.stream().map(this::TaskToDto).collect(Collectors.toList());	
 	}
-	
+	public Page<TaskDto> GetAllTaskDetailsBypagingAndSorting(Pageable pageable)
+	{
+		Page<Task> tasks= taskRepo.findAll(pageable);	
+		return tasks.map(this::TaskToDto);
+	}
 	public TaskDto GetTaskDetaisById(long id)
 	{
 		Task task = taskRepo.findById(id).orElseThrow();
@@ -106,10 +111,7 @@ taskDto.setId(id);
 		taskRepo.save(task);
 	}
 	
-	public void delete(long id)
-	{
-		taskRepo.deleteById(id);
-	}
+
 	
 	
 }
