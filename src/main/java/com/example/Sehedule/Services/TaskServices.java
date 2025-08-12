@@ -88,10 +88,19 @@ public class TaskServices {
 		List<Task> tasks= taskRepo.findAll();	
 		return tasks.stream().map(this::TaskToDto).collect(Collectors.toList());	
 	}
-	public Page<TaskDto> GetAllTaskDetailsBypagingAndSorting(Pageable pageable)
+	public Page<TaskDto> GetAllTaskDetailsBypagingAndSorting(LocalDate sehduleDate , Pageable pageable)
 	{
-		Page<Task> tasks= taskRepo.findAll(pageable);	
-		return tasks.map(this::TaskToDto);
+		 Page<Task> taskPage;
+			if(sehduleDate!=null)
+			{
+				taskPage=	taskRepo.findBySehduleDate(sehduleDate, pageable);
+			}
+			else 
+			{
+				taskPage=	taskRepo.findAll( pageable);
+			}
+//		Page<Task> tasks= taskRepo.findAll(pageable);	
+		return taskPage.map(this::TaskToDto);
 	}
 	public TaskDto GetTaskDetaisById(long id)
 	{
@@ -110,6 +119,7 @@ taskDto.setId(id);
 		
 		taskRepo.save(task);
 	}
+	
 	
 
 	

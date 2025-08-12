@@ -3,6 +3,7 @@ package com.example.Sehedule;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Dtos.TaskDto;

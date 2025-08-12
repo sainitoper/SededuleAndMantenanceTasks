@@ -21,6 +21,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Import;
+
 
 import com.example.Sehedule.CustomException.StatusTpyeNotNullException;
 import com.example.Sehedule.Dtos.AreaDto;

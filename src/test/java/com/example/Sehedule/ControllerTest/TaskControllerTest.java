@@ -1,6 +1,7 @@
 package com.example.Sehedule.ControllerTest;
 
 import com.example.Sehedule.Dtos.TaskDto;
+
 import com.example.Sehedule.Controller.TaskController;
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Services.CsvServices;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 

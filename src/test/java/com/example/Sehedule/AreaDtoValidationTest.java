@@ -7,6 +7,7 @@ import jakarta.validation.ValidatorFactory;
 import jakarta.validation.ConstraintViolation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.validations.logic.ValidFloorValidator;

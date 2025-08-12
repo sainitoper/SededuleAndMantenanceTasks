@@ -54,9 +54,10 @@ private CsvServices csvServices;
 	 @GetMapping("/getAllByPaging")
 	    @Operation(summary = "Get all By paging", description = "Fetch all tasks by paging and sorting")
 	    @ApiResponses(value = {
-	            @ApiResponse(responseCode = "200", description = "Successfully retrieved tasks by sorting and paging")
+	            @ApiResponse(responseCode = "200", description = "Successfully retrieved tasks by sorting,filtering and paging")
 	    })
 	public Page<TaskDto> getAlltasks(
+			@RequestParam(required = false)LocalDate sehduleDate,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id") String sortBy,
@@ -66,7 +67,7 @@ private CsvServices csvServices;
 		 Sort sort = sortdir.equalsIgnoreCase("desc")?
 				 Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
 		 Pageable pageable = PageRequest.of(page, size,sort);
-		return taskServices.GetAllTaskDetailsBypagingAndSorting(pageable);
+		return taskServices.GetAllTaskDetailsBypagingAndSorting(sehduleDate,pageable);
 		
 	}
 	 @GetMapping("/id/{myid}")

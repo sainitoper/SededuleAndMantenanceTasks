@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.hibernate.internal.build.AllowSysOut;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 
 import com.example.Sehedule.Dtos.AreaDto;
 import com.example.Sehedule.Dtos.TaskDto;
@@ -14,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+
+
 public class TaskDtoTest {
 	@Test
 	void testgeterandsetters()
